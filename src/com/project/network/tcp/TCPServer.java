@@ -20,11 +20,12 @@ public class TCPServer {
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("Client connecté : " + clientSocket.getInetAddress());
-
+            //creating input and output streams for client communication
                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 
                 String message;
+                //loop to continuously read messages from the client
                 while ((message = in.readLine()) != null) {
                     System.out.println("Reçu : " + message);
                     out.println(clientSocket.getInetAddress() + ": " + message);
@@ -38,6 +39,7 @@ public class TCPServer {
     }
 
     public static void main(String[] args) {
+        //determining the port from command-line arguments, default to DEFAULT_PORT
         int port = (args.length > 0) ? Integer.parseInt(args[0]) : 8080;
         TCPServer server = new TCPServer(port);
         server.launch();

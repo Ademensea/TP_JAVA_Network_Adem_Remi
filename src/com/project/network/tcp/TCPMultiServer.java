@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 
 public class TCPMultiServer {
     private static final int DEFAULT_PORT = 8080; 
-    private static final int THREAD_POOL_SIZE = 10; // Taille du pool de threads
+    private static final int THREAD_POOL_SIZE = 10; 
     private final int port;
 
     public TCPMultiServer(int port) {
@@ -24,6 +24,7 @@ public class TCPMultiServer {
     }
 
     public void launch() {
+        //creating a thread pool to handle multiple clients
         ExecutorService threadPool = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
         System.out.println("TCP Multi-Client Server running on port " + port);
 
@@ -31,11 +32,13 @@ public class TCPMultiServer {
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("New client connected: " + clientSocket.getInetAddress());
+                //delegating the client handling to a separate thread
                 threadPool.execute(new ConnectionHandler(clientSocket));
             }
         } catch (Exception e) {
             System.err.println("Error in TCPMultiServer: " + e.getMessage());
         } finally {
+            //shutting down thread pull when server stops
             threadPool.shutdown();
         }
     }
@@ -46,7 +49,7 @@ public class TCPMultiServer {
         server.launch();
     }
 }
-
+//runnable class to handle communication with a single client
 class ConnectionHandler implements Runnable {
     private static final String EXIT_COMMAND = "exit";
     private final Socket clientSocket;

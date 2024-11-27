@@ -15,7 +15,7 @@ public class TCPClient {
             System.out.println("Usage: java TCPClient <host> <port>");
             return;
         }
-
+       //retrieving server host and port from command-line arguments
         String host = args[0];
         int port = Integer.parseInt(args[1]);
 
@@ -25,10 +25,12 @@ public class TCPClient {
              PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8), true)) {
 
             System.out.println("Connected to server. Type 'exit' to disconnect.");
-
+        
             String message;
+            //reading messages from the user and send them to the server
             while ((message = console.readLine()) != null) {
                 out.println(message);
+                //displaying server's reply
                 System.out.println("Server response: " + in.readLine());
 
                 if (message.equalsIgnoreCase(EXIT_COMMAND)) {
