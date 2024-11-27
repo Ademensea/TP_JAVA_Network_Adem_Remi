@@ -4,6 +4,7 @@ import java.net.DatagramSocket;
 
 
 public class UDPServer {
+    //default port if none is specified
     private static final int DEFAULT_PORT = 8080;
     private int port;
 
@@ -16,12 +17,14 @@ public class UDPServer {
     }
 
     public void launch() {
+        //creating UDP socket on specified port
         try (DatagramSocket socket = new DatagramSocket(port)) {
             System.out.println("Serveur UDP en écoute sur le port " + port);
-
+        //buffer to keep received data
             byte[] buffer = new byte[1024];
 
             while (true) {
+            //creating packet to receive data
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
                 socket.receive(packet);
 
@@ -34,6 +37,7 @@ public class UDPServer {
     }
 
     public static void main(String[] args) {
+        //veryfing if a port is passed as an argument , if not ,default port is used
         int portToUse;
         if (args.length > 0) {
             portToUse = Integer.parseInt(args[0]);

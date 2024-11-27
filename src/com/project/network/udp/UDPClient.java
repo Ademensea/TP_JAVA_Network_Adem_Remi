@@ -16,7 +16,9 @@ public class UDPClient {
 
     public void sendMessage(String message) {
         try (DatagramSocket socket = new DatagramSocket()) {
+            //converting message to bytes using UTF-8 encoding
             byte[] buffer = message.getBytes("UTF-8");
+            //creating packet with message,server,adress and port
             DatagramPacket packet = new DatagramPacket(buffer, buffer.length, InetAddress.getByName(serverAddress), port);
             socket.send(packet);
         } catch (Exception e) {
@@ -36,13 +38,14 @@ public class UDPClient {
         }
 
         UDPClient client = new UDPClient(serverAddress, portToUse);
+        //getting console for user input
         Console console = System.console();
 
         if (console == null) {
             System.err.println("Aucune console disponible.");
             return;
         }
-
+       //loop to send and read messages from the console
         while (true) {
             String message = console.readLine("Entrez un message à envoyer (ou 'exit' pour quitter) : ");
             if ("exit".equalsIgnoreCase(message)) {
