@@ -1,46 +1,62 @@
 package com.project.network.tcp;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 
+/**
+ * TCPClient handles the TCP communication with a server.
+ */
 public class TCPClient {
-    private static final String EXIT_COMMAND = "exit";
+    private String serverAddress;
+    private int port;
+    private Socket socket;
+    private PrintWriter out;
+    private BufferedReader in;
 
-    public static void main(String[] args) {
-        if (args.length != 2) {
-            System.out.println("Usage: java TCPClient <host> <port>");
-            return;
-        }
-       //retrieving server host and port from command-line arguments
-        String host = args[0];
-        int port = Integer.parseInt(args[1]);
+    /**
+     * Constructor for TCPClient.
+     * @param serverAddress The server's address.
+     * @param port The port to connect to.
+     */
+    public TCPClient(String serverAddress, int port) {
+        this.serverAddress = serverAddress;
+        this.port = port;
+    }
 
-        try (Socket socket = new Socket(host, port);
-             BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
-             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
-             PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8), true)) {
+    /**
+     * Connects to the server.
+     * @throws IOException if the connection fails.
+     */
+    public void connect() throws IOException {
+        socket = new Socket(serverAddress, port);
+        out = new PrintWriter(socket.getOutputStream(), true);
+        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+    }
 
-            System.out.println("Connected to server. Type 'exit' to disconnect.");
-        
-            String message;
-            //reading messages from the user and send them to the server
-            while ((message = console.readLine()) != null) {
-                out.println(message);
-                //displaying server's reply
-                System.out.println("Server response: " + in.readLine());
+    /**
+     * Sends a message to the server and receives a response.
+     * @param message The message to send.
+     * @return The server's response.
+     * @throws IOException if an I/O error occurs.
+     */
+    public String sendMessage(String message) throws IOException {
+        out.println(message);
+        return in.readLine();
+    }
 
-                if (message.equalsIgnoreCase(EXIT_COMMAND)) {
-                    System.out.println("Client terminated.");
-                    break;
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("Error in TCPClient: " + e.getMessage());
+    /**
+     * Disconnects from the server.
+     * @throws IOException if an I/O error occurs.
+     */
+    public void disconnect() throws IOException {
+        if (socket != null) {
+            socket.close();
         }
     }
 }
+
+
 
