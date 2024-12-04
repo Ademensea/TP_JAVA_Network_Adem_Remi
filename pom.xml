@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <!-- Définition du projet -->
+    <!-- We define the project -->
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.project</groupId>
     <artifactId>network</artifactId>
@@ -13,15 +13,15 @@
     <name>TP_JAVA_NETWORK_ADEM_REMI</name>
     <description>Project for network communication in Java (TCP/UDP)</description>
 
-    <!-- Définition des propriétés -->
+    <!-- We define properties -->
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
-    <!-- Dépendances -->
+    <!-- dependancies -->
     <dependencies>
-        <!-- Dépendance pour les tests JUnit 5 -->
+        <!-- tests JUnit 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -36,10 +36,10 @@
         </dependency>
     </dependencies>
 
-    <!-- Configuration des plugins -->
+    <!-- Configuration plugins -->
     <build>
         <plugins>
-            <!-- Plugin Maven Compiler pour spécifier la version de Java -->
+            <!-- Plugin Maven Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
