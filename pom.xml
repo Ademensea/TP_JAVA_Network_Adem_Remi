@@ -55,6 +55,7 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.2.0</version>
                 <executions>
+                    <!-- TCPClient JAR -->
                     <execution>
                         <id>tcp-client-jar</id>
                         <phase>package</phase>
@@ -73,7 +74,127 @@
                             <goal>single</goal>
                         </goals>
                     </execution>
-                    <!-- Additional configurations for other JARs here -->
+
+                    <!-- TCPServer JAR -->
+                    <execution>
+                        <id>tcp-server-jar</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <mainClass>com.project.network.tcp.TCPServer</mainClass>
+                                </manifest>
+                            </archive>
+                            <finalName>TCPServer</finalName>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                        </configuration>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+
+                    <!-- TCPMultiServer JAR -->
+                    <execution>
+                        <id>tcp-multiserver-jar</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <mainClass>com.project.network.tcp.TCPMultiServer</mainClass>
+                                </manifest>
+                            </archive>
+                            <finalName>TCPMultiServer</finalName>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                        </configuration>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+
+                    <!-- UDPClient JAR -->
+                    <execution>
+                        <id>udp-client-jar</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <mainClass>com.project.network.udp.UDPClient</mainClass>
+                                </manifest>
+                            </archive>
+                            <finalName>UDPClient</finalName>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                        </configuration>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+
+                    <!-- UDPServer JAR -->
+                    <execution>
+                        <id>udp-server-jar</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <mainClass>com.project.network.udp.UDPServer</mainClass>
+                                </manifest>
+                            </archive>
+                            <finalName>UDPServer</finalName>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                        </configuration>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+
+                    <!-- ConnectionThread JAR -->
+                    <execution>
+                        <id>connection-thread-jar</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <mainClass>com.project.network.tcp.ConnectionThread</mainClass>
+                                </manifest>
+                            </archive>
+                            <finalName>ConnectionThread</finalName>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                        </configuration>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+
+                    <!-- TCPClientGUI JAR -->
+                    <execution>
+                        <id>tcp-client-gui-jar</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <mainClass>com.project.network.gui.TCPClientGUI</mainClass>
+                                </manifest>
+                            </archive>
+                            <finalName>TCPClientGUI</finalName>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                        </configuration>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+
                 </executions>
             </plugin>
         </plugins>
