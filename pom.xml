@@ -21,6 +21,7 @@
 
     <!-- Dependencies -->
     <dependencies>
+        <!-- JUnit for testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -49,7 +50,17 @@
                 </configuration>
             </plugin>
 
-            <!-- Maven Assembly Plugin -->
+            <!-- Maven Surefire Plugin for testing -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+                <configuration>
+                    <testSourceDirectory>src/test/java</testSourceDirectory> <!-- Répertoire des tests -->
+                </configuration>
+            </plugin>
+
+            <!-- Maven Assembly Plugin for creating JAR files -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -182,7 +193,7 @@
                         <configuration>
                             <archive>
                                 <manifest>
-                                    <mainClass>com.project.network.gui.TCPClientGUI</mainClass>
+                                    <mainClass>com.project.network.GUI.TCPClientGUI</mainClass>
                                 </manifest>
                             </archive>
                             <finalName>TCPClientGUI</finalName>
@@ -199,4 +210,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>
